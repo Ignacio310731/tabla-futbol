@@ -1,30 +1,57 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Tablas de Posiciones - Club Tucuman</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+    }
+    th, td {
+      border: 1px solid #858fcd;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #3e6084;
+      color: white
+    }
+  </style>
 </head>
 <body>
   <h1>Tablas de Posiciones - Club Tucuman</h1>
 
+  <div style="text-align: center;">
+    <img src="logo-tucu.png" alt="Logo del Club" style="max-width: 200px; height: auto;">
+  </div>
+
+  <!-- Categorías -->
   <section>
     <h2>Categoria A</h2>
-    <table>
+    <table class="posiciones">
       <thead>
         <tr><th>Equipos</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th><th>GF</th><th>GC</th><th>Puntos</th></tr>
       </thead>
       <tbody>
         <tr><td>Centenario</td><td>8</td><td>5</td><td>2</td><td>1</td><td>14</td><td>7</td><td>17</td></tr>
-        <tr><td>El Jrs</td><td>8</td><td>4</td><td>3</td><td>1</td><td>12</td><td>8</td><td>15</td></tr>
+        <tr><td>El Jrs</td><td>9</td><td>5</td><td>3</td><td>1</td><td>12</td><td>8</td><td>18</td></tr>
+        <tr><td>Atento Yiyo</td><td>8</td><td>5</td><td>2</td><td>1</td><td>14</td><td>7</td><td>17</td></tr>
+        <tr><td>Los pibes de Chaco</td><td>8</td><td>4</td><td>3</td><td>1</td><td>12</td><td>8</td><td>15</td></tr>
+        <tr><td>Los Eucaliptus</td><td>8</td><td>5</td><td>2</td><td>1</td><td>14</td><td>7</td><td>17</td></tr>
+        <tr><td>Monoblock 420</td><td>8</td><td>4</td><td>3</td><td>1</td><td>12</td><td>8</td><td>15</td></tr>
+        <tr><td>As de Basto</td><td>8</td><td>5</td><td>2</td><td>1</td><td>14</td><td>7</td><td>17</td></tr>
+        <tr><td>San Lorenzo</td><td>9</td><td>5</td><td>3</td><td>1</td><td>12</td><td>8</td><td>15</td></tr>
       </tbody>
     </table>
   </section>
 
   <section>
     <h2>Categoria B</h2>
-    <table>
+    <table class="posiciones">
       <thead>
         <tr><th>Equipos</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th><th>GF</th><th>GC</th><th>Puntos</th></tr>
       </thead>
@@ -37,7 +64,7 @@
 
   <section>
     <h2>Categoria C</h2>
-    <table>
+    <table class="posiciones">
       <thead>
         <tr><th>Equipos</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th><th>GF</th><th>GC</th><th>Puntos</th></tr>
       </thead>
@@ -50,7 +77,7 @@
 
   <section>
     <h2>Categoria +38</h2>
-    <table>
+    <table class="posiciones">
       <thead>
         <tr><th>Equipos</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th><th>GF</th><th>GC</th><th>Puntos</th></tr>
       </thead>
@@ -63,7 +90,7 @@
 
   <section>
     <h2>Categoria +45</h2>
-    <table>
+    <table class="posiciones">
       <thead>
         <tr><th>Equipos</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th><th>GF</th><th>GC</th><th>Puntos</th></tr>
       </thead>
@@ -74,22 +101,34 @@
     </table>
   </section>
 
-<section>
-  <h2>Goleadores</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Equipo</th>
-        <th>Goles</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>Alejandro Andrada</td><td>Athletic Bilbao</td><td>16</td></tr>
-      <tr><td>Leo Cristaldo</td><td>Borracho y Quinielero</td><td>12</td></tr>
-    </tbody>
-  </table>
-</section>
+  <section>
+    <h2>Goleadores</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Equipo</th>
+          <th>Goles</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Alejandro Andrada</td><td>Athletic Bilbao</td><td>16</td></tr>
+        <tr><td>Leo Cristaldo</td><td>Borracho y Quinielero</td><td>12</td></tr>
+      </tbody>
+    </table>
+  </section>
 
+  <script>
+    document.querySelectorAll("table.posiciones").forEach((table) => {
+      const tbody = table.querySelector("tbody");
+      const rows = Array.from(tbody.querySelectorAll("tr"));
+      rows.sort((a, b) => {
+        const puntosA = parseInt(a.children[7].innerText);
+        const puntosB = parseInt(b.children[7].innerText);
+        return puntosB - puntosA; // mayor a menor
+      });
+      rows.forEach(row => tbody.appendChild(row));
+    });
+  </script>
 </body>
 </html>
